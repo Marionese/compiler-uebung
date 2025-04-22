@@ -30,25 +30,43 @@ ParseResult rootFromStr(Root *root, const char *str) {
 	for (char c = *str; c != '\0'; c = *++str) {
 		switch (c) {
 		case '+':
-			TODO("Additionsknoten auf den Stapel legen");
-			break;
-			
+			Expr lhs;
+			Expr rhs;
+			vecPop(expr_stack) = rhs;
+			vecPop(expr_stack) = lhs;
+			Expr add = exprFromAdd(lhs,rhs);
+			vecPush(expr_stack) = add;
 		case '-':
-			TODO("Subtraktionsknoten auf den Stapel legen");
-			break;
-			
+			Expr lhs;
+			Expr rhs;
+			vecPop(expr_stack) = rhs;
+			vecPop(expr_stack) = lhs;
+			Expr sub = exprFromSub(lhs,rhs);
+			vecPush(expr_stack) = sub;
 		case '*':
-			TODO("Multiplikationsknoten auf den Stapel legen");
-			break;
+			Expr lhs;
+			Expr rhs;
+			vecPop(expr_stack) = rhs;
+			vecPop(expr_stack) = lhs;
+			Expr mult = exprFromMul(lhs,rhs);
+			vecPush(expr_stack) = mult;
 			
 		case '/':
-			TODO("Divisionsknoten auf den Stapel legen");
-			break;
+			Expr lhs;
+			Expr rhs;
+			vecPop(expr_stack) = rhs;
+			vecPop(expr_stack) = lhs;
+			Expr div = exprFromDiv(lhs,rhs);
+			vecPush(expr_stack) = div;
 			
 		case '=':
-			TODO("Zuweisungsknoten auf den Stapel legen");
-			break;
-			
+			Expr expr;
+			vecPop(expr_stack) = expr;
+			Expr varex;
+			vecPop(expr_stack) = varex;
+			char var = varex.var;
+			Stmt equal = stmtFromSet(var,expr);
+			vecPush(stmt_list) = equal;
 		default:
 			if (isspace(c))
 				continue;
@@ -63,7 +81,7 @@ ParseResult rootFromStr(Root *root, const char *str) {
 				break;
 			}
 			
-			TODO("geeigneten Fehlercode zurückgeben");
+			rc = PARSE_ERR_LEXICAL;
 			goto err;
 		}
 	}
@@ -73,7 +91,7 @@ ParseResult rootFromStr(Root *root, const char *str) {
 	}
 	
 	if (!vecIsEmpty(expr_stack)) {
-		TODO("geeigneten Fehlercode zurückgeben");
+		rc = PARSE_ERR_SYNTAX;
 		goto err;
 	}
 	
