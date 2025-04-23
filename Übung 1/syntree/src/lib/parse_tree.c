@@ -19,7 +19,8 @@
 /* ********************************************************* public interface */
 
 ParseResult rootFromStr(Root *root, const char *str) {
-	// TODO: Funktionskörper vervollständigen
+	Expr lhs;
+	Expr rhs;
 	ParseResult rc = PARSE_OK;
 	Stmt *stmt_list;
 	Expr *expr_stack;
@@ -30,54 +31,72 @@ ParseResult rootFromStr(Root *root, const char *str) {
 	for (char c = *str; c != '\0'; c = *++str) {
 		switch (c) {
 		case '+':
-			Expr lhs;
-			Expr rhs;
-			vecPop(expr_stack) = rhs;
-			vecPop(expr_stack) = lhs;
+			if (vecLen(expr_stack) < 2) {
+				rc = PARSE_ERR_SYNTAX;
+				goto err;
+			}
+			rhs = vecPop(expr_stack) ;
+			lhs =vecPop(expr_stack) ;
 			Expr add = exprFromAdd(lhs,rhs);
 			vecPush(expr_stack) = add;
+			break;
 		case '-':
-			Expr lhs;
-			Expr rhs;
-			vecPop(expr_stack) = rhs;
-			vecPop(expr_stack) = lhs;
+			if (vecLen(expr_stack) < 2) {
+				rc = PARSE_ERR_SYNTAX;
+				goto err;
+			}
+			rhs = vecPop(expr_stack);
+			lhs = vecPop(expr_stack);
 			Expr sub = exprFromSub(lhs,rhs);
 			vecPush(expr_stack) = sub;
+			break;
 		case '*':
-			Expr lhs;
-			Expr rhs;
-			vecPop(expr_stack) = rhs;
-			vecPop(expr_stack) = lhs;
+			if (vecLen(expr_stack) < 2) {
+				rc = PARSE_ERR_SYNTAX;
+				goto err;
+			}
+			rhs = vecPop(expr_stack);
+			lhs = vecPop(expr_stack);
 			Expr mult = exprFromMul(lhs,rhs);
 			vecPush(expr_stack) = mult;
-			
+			break;
 		case '/':
-			Expr lhs;
-			Expr rhs;
-			vecPop(expr_stack) = rhs;
-			vecPop(expr_stack) = lhs;
+			if (vecLen(expr_stack) < 2) {
+				rc = PARSE_ERR_SYNTAX;
+				goto err;
+			}
+			rhs = vecPop(expr_stack);
+			lhs = vecPop(expr_stack);
 			Expr div = exprFromDiv(lhs,rhs);
 			vecPush(expr_stack) = div;
-			
+			break;
 		case '=':
-			Expr expr;
-			vecPop(expr_stack) = expr;
-			Expr varex;
-			vecPop(expr_stack) = varex;
+			if (vecLen(expr_stack) < 2) {
+				rc = PARSE_ERR_SYNTAX;
+				goto err;
+			}
+			Expr expr = vecPop(expr_stack) ;
+			Expr varex = vecPop(expr_stack) ;
+			if (varex.tag != EXPR_VAR) { 
+				rc = PARSE_ERR_SYNTAX;
+				goto err;
+			}
 			char var = varex.var;
 			Stmt equal = stmtFromSet(var,expr);
 			vecPush(stmt_list) = equal;
+			break;
 		default:
 			if (isspace(c))
 				continue;
 			
 			if (isdigit(c)) {
-				TODO("Ziffer in Zahl konvertieren und auf den Stapel legen");
+				int digit = c - '0';
+				vecPush(expr_stack) = exprFromInt(digit);
 				break;
 			}
 			
 			if (islower(c)) {
-				TODO("Variablenname auf den Stapel legen");
+				vecPush(expr_stack) = exprFromVar(c);
 				break;
 			}
 			
@@ -314,7 +333,6 @@ bool parse_add(void) {
 	
 	EXPECT(rootFromStr(&tree, "4 2 +") == PARSE_OK);
 	EXPECT(rootEq(&tree, &expected));
-	
 	return true;
 }
 
@@ -344,7 +362,6 @@ bool parse_mul(void) {
 	
 	EXPECT(rootFromStr(&tree, "4 2 *") == PARSE_OK);
 	EXPECT(rootEq(&tree, &expected));
-	
 	return true;
 }
 
