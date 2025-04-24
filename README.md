@@ -1,6 +1,6 @@
 # Compiler-Übung
 
-This repository contains my exercises for the Compilerbau (Compiler Construction) course at university.
+This repository contains my exercises for the Compilerbau (Compiler Construction) course at my university.
 
 ## Progress
 
