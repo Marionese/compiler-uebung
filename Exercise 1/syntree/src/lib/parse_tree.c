@@ -78,7 +78,7 @@ ParseResult rootFromStr(Root *root, const char *str) {
 			Expr expr = vecPop(expr_stack) ;
 			Expr varex = vecPop(expr_stack) ;
 			if (varex.tag != EXPR_VAR) { 
-				rc = PARSE_ERR_SYNTAX;
+				rc = PARSE_ERR_SEMANTIC;
 				goto err;
 			}
 			char var = varex.var;
