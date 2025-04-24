@@ -86,7 +86,8 @@ extern void printerFormat(Printer *self, const Root *root);
 	X(printer_sub)    \
 	X(printer_mul)    \
 	X(printer_div)    \
-	X(printer_set)
+	X(printer_set)	  \
+	X(printer_set_and_add)
 
 #define X(TEST) extern bool TEST(void);
 PRINTER_TESTS

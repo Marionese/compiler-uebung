@@ -12,29 +12,43 @@ static void visitExpr(Printer *self, const Expr *expr) {
 	// TODO: eventuell Ergänzungen vornehmen
 	switch (expr->tag) {
 	case EXPR_INT:
+		fprintf(self->out,"%d",expr->val);
 		break;
 		
 	case EXPR_VAR:
+	fprintf(self->out,"%c",expr->var);
 		break;
 		
 	case EXPR_ADD:
+		fprintf(self->out, "(");
 		visitExpr(self, expr->op.lhs);
+		fprintf(self->out, "+");
 		visitExpr(self, expr->op.rhs);
+		fprintf(self->out, ")");
 		break;
 		
 	case EXPR_SUB:
+		fprintf(self->out, "(");
 		visitExpr(self, expr->op.lhs);
+		fprintf(self->out, "-");
 		visitExpr(self, expr->op.rhs);
+		fprintf(self->out, ")");
 		break;
 		
 	case EXPR_MUL:
+		fprintf(self->out, "(");
 		visitExpr(self, expr->op.lhs);
+		fprintf(self->out, "*");
 		visitExpr(self, expr->op.rhs);
+		fprintf(self->out, ")");
 		break;
 		
 	case EXPR_DIV:
+		fprintf(self->out, "(");
 		visitExpr(self, expr->op.lhs);
+		fprintf(self->out, "/");
 		visitExpr(self, expr->op.rhs);
+		fprintf(self->out, ")");	
 		break;
 	}
 }
@@ -42,12 +56,15 @@ static void visitExpr(Printer *self, const Expr *expr) {
 static void visitStmt(Printer *self, const Stmt *stmt) {
 	// TODO: eventuell Ergänzungen vornehmen
 	switch (stmt->tag) {
-	case STMT_EXPR:
+	case STMT_EXPR: 
 		visitExpr(self, &stmt->expr);
 		break;
 		
 	case STMT_SET:
+		fprintf(self->out, "%c",stmt->set.var);
+		fprintf(self->out, "=");
 		visitExpr(self, &stmt->set.expr);
+		fprintf(self->out, "\n");
 		break;
 	}
 }
@@ -148,5 +165,9 @@ bool printer_set(void) {
 	Root root = rootFromStmt(stmtFromSet('a', exprFromInt(1)));
 	return test(&root, "a=1");
 }
-
+bool printer_set_and_add(void) {
+	Root root = rootFromStmt(stmtFromSet('a', exprFromInt(1)));
+	rootPushStmt(&root, stmtFromExpr(exprFromAdd(exprFromVar('a'), exprFromVar('a'))));
+	return test(&root, "a=1\n(a+a)");
+}
 #endif
