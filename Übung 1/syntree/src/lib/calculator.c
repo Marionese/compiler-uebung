@@ -9,32 +9,52 @@
 /* ******************************************************* private interface */
 
 static void visitExpr(Calculator *self, const Expr *expr) {
-	// TODO: eventuell Ergänzungen vornehmen
+	int rhs;
+	int lhs;
 	switch (expr->tag) {
 	case EXPR_INT:
+		self->result = expr->val;
 		break;
 		
 	case EXPR_VAR:
+		int index = expr->var - 'a';
+	    self->result = self->var_values[index];
 		break;
 		
 	case EXPR_ADD:
 		visitExpr(self, expr->op.lhs);
+		lhs = self->result;
 		visitExpr(self, expr->op.rhs);
+		rhs = self->result;
+		
+		self->result = lhs + rhs;
 		break;
 		
 	case EXPR_SUB:
 		visitExpr(self, expr->op.lhs);
+		lhs = self->result;
 		visitExpr(self, expr->op.rhs);
+		rhs = self->result;
+
+		self->result = lhs - rhs;
 		break;
 		
 	case EXPR_MUL:
 		visitExpr(self, expr->op.lhs);
+		lhs = self->result;
 		visitExpr(self, expr->op.rhs);
+		rhs = self->result;
+
+		self->result = lhs * rhs;
 		break;
 		
 	case EXPR_DIV:
 		visitExpr(self, expr->op.lhs);
+		lhs = self->result;
 		visitExpr(self, expr->op.rhs);
+		rhs = self->result;
+	
+		self->result = lhs / rhs;
 		break;
 	}
 }
@@ -48,6 +68,9 @@ static void visitStmt(Calculator *self, const Stmt *stmt) {
 		
 	case STMT_SET:
 		visitExpr(self, &stmt->set.expr);
+		int index = stmt->set.var - 'a';
+		self->var_values[index] = self->result;
+		self->result = 0;
 		break;
 	}
 }
@@ -62,9 +85,14 @@ static void visitRoot(Calculator *self, const Root *root) {
 /* ******************************************************** public interface */
 
 int calculatorCalc(Calculator *self, Root *root) {
-	// TODO: eventuell Ergänzungen vornehmen
+	// fill vars[] with chars a-z and results[] with 0
+	for (int i = 0; i < 26; i++){
+		self->var_values[i]= 0;
+		
+	}
+	self->result = 0; 
 	visitRoot(self, root);
-	return 0;
+	return self->result;
 }
 
 /* *************************************************************** unit tests */
@@ -150,5 +178,39 @@ bool calc_vars(void) {
 	EXPECT(calculatorCalc(&calc, &root) == 3);
 	return true;
 }
+bool calc_set_and_add(void) {
+	Root root = rootFromStmt(stmtFromSet('a', exprFromInt(1)));
+	rootPushStmt(&root, stmtFromExpr(exprFromAdd(exprFromVar('a'), exprFromVar('a'))));
+	Calculator calc;
+	EXPECT(calculatorCalc(&calc, &root) == 2);
+	return true;
+}
+bool calc_complex_test(void) {
+	// Initialize root with multiple statements
+	Root root = rootFromStmt(stmtFromSet('a', exprFromInt(3)));          // a = 3
+	rootPushStmt(&root, stmtFromSet('b', exprFromInt(4)));               // b = 4
+	rootPushStmt(&root, stmtFromSet('c', exprFromAdd(                   // c = a + b
+		exprFromVar('a'), 
+		exprFromVar('b')
+	)));
+	rootPushStmt(&root, stmtFromExpr(                                   // (a * b) + c
+		exprFromAdd(
+			exprFromMul(
+				exprFromVar('a'),
+				exprFromVar('b')
+			),
+			exprFromVar('c')
+		)
+	));
 
+	Calculator calc;
+	EXPECT(calculatorCalc(&calc, &root) == 19);  // Final result should be 19
+
+	// Optional: Check internal variable values directly
+	EXPECT(calc.var_values['a' - 'a'] == 3);
+	EXPECT(calc.var_values['b' - 'a'] == 4);
+	EXPECT(calc.var_values['c' - 'a'] == 7);
+
+	return true;
+}
 #endif

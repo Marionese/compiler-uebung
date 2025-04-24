@@ -24,7 +24,7 @@
 #define CALCULATOR_H_INCLUDED
 
 #include "parse_tree.h"
-
+#include "stdbool.h"
 /* *** structures *********************************************************** */
 
 /**
@@ -41,6 +41,8 @@
 ```
  */
 typedef struct Calculator {
+	int var_values[26];
+	int result; 
 	// TODO: Attribute für Variablenbelegungen und Ergebnis fehlen
 } Calculator;
 
@@ -63,7 +65,9 @@ extern int calculatorCalc(Calculator *self, Root *root);
 	X(calc_mul)          \
 	X(calc_div)          \
 	X(calc_set)          \
-	X(calc_vars)
+	X(calc_vars)         \
+	X(calc_set_and_add)  \
+	X(calc_complex_test)
 
 #define X(TEST) extern bool TEST(void);
 CALCULATOR_TESTS
