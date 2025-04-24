@@ -64,7 +64,7 @@ static void visitStmt(Printer *self, const Stmt *stmt) {
 		fprintf(self->out, "%c",stmt->set.var);
 		fprintf(self->out, "=");
 		visitExpr(self, &stmt->set.expr);
-		fprintf(self->out, "\n");
+		
 		break;
 	}
 }
@@ -73,6 +73,7 @@ static void visitRoot(Printer *self, const Root *root) {
 	// TODO: eventuell Ergänzungen vornehmen
 	vecForEach(const Stmt *stmt, root->stmt_list) {
 		visitStmt(self, stmt);
+		fprintf(self->out, "\n");
 	}
 }
 
