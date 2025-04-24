@@ -11,13 +11,14 @@
 static void visitExpr(Calculator *self, const Expr *expr) {
 	int rhs;
 	int lhs;
+	int index;
 	switch (expr->tag) {
 	case EXPR_INT:
 		self->result = expr->val;
 		break;
 		
 	case EXPR_VAR:
-		int index = expr->var - 'a';
+		index = expr->var - 'a';
 	    self->result = self->var_values[index];
 		break;
 		
