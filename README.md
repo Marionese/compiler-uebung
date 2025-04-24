@@ -3,4 +3,4 @@
     - [x] Parser
     - [x] Printer
     - [x] Calculator
-- [] Übung 2
+- [ ] Übung 2
