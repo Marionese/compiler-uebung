@@ -1,6 +1,6 @@
 # Compiler-Übung
 
-This repository contains exercises for building a simple compiler, including components such as a parser, printer, and calculator. Each exercise focuses on a specific aspect of compiler construction.
+This repository contains my exercises for the Compilerbau (Compiler Construction) course at university.
 
 ## Progress
 
