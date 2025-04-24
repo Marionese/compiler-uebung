@@ -4,7 +4,7 @@ This repository contains my exercises for the Compilerbau (Compiler Construction
 
 ## Progress
 
-### Übung 1: Basic Compiler Components
+### Exercise 1: Basic Compiler Components
 - [x] **Parser**  
   Parses arithmetic expressions and constructs a syntax tree.
 - [x] **Printer**  
