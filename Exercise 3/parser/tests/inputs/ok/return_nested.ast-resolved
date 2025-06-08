@@ -1,0 +1,545 @@
+(Program) {
+    .items = [
+        [0] = GlobalVar((VarDef) {
+            .data_type = int,
+            .res_ident = (ResIdent) {
+                .ident = "count",
+                .res = (DefId) 0
+            },
+            .init = None()
+        }),
+        [1] = Func((FuncDef) {
+            .return_type = int,
+            .ident = "check_while",
+            .params = [],
+            .statements = [
+                [0] = Assign((Assign) {
+                    .lhs = (ResIdent) {
+                        .ident = "count",
+                        .res = (DefId) 0
+                    },
+                    .rhs = Literal(int, Int(0))
+                }),
+                [1] = While((WhileStmt) {
+                    .cond = BinaryOp(bool, (BinOpExpr) {
+                        .op = Gt,
+                        .lhs = Assign(int, (Assign) {
+                            .lhs = (ResIdent) {
+                                .ident = "count",
+                                .res = (DefId) 0
+                            },
+                            .rhs = BinaryOp(int, (BinOpExpr) {
+                                .op = Add,
+                                .lhs = Var(int, (ResIdent) {
+                                    .ident = "count",
+                                    .res = (DefId) 0
+                                }),
+                                .rhs = Literal(int, Int(1))
+                            })
+                        }),
+                        .rhs = Literal(int, Int(0))
+                    }),
+                    .body = Return(Literal(int, Int(1)))
+                }),
+                [2] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(string, String("after while should be unreachable"))
+                    ]
+                })
+            ]
+        }),
+        [2] = Func((FuncDef) {
+            .return_type = int,
+            .ident = "check_do_while",
+            .params = [],
+            .statements = [
+                [0] = DoWhile((WhileStmt) {
+                    .cond = BinaryOp(bool, (BinOpExpr) {
+                        .op = Eq,
+                        .lhs = Assign(int, (Assign) {
+                            .lhs = (ResIdent) {
+                                .ident = "count",
+                                .res = (DefId) 0
+                            },
+                            .rhs = UnaryMinus(int, Literal(int, Int(1)))
+                        }),
+                        .rhs = UnaryMinus(int, Literal(int, Int(1)))
+                    }),
+                    .body = Return(Literal(int, Int(2)))
+                }),
+                [1] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(string, String("after do-while should be unreachable"))
+                    ]
+                })
+            ]
+        }),
+        [3] = Func((FuncDef) {
+            .return_type = int,
+            .ident = "check_for",
+            .params = [],
+            .statements = [
+                [0] = For((ForStmt) {
+                    .init = Assign((Assign) {
+                        .lhs = (ResIdent) {
+                            .ident = "count",
+                            .res = (DefId) 0
+                        },
+                        .rhs = Literal(int, Int(0))
+                    }),
+                    .cond = BinaryOp(bool, (BinOpExpr) {
+                        .op = Gt,
+                        .lhs = Assign(int, (Assign) {
+                            .lhs = (ResIdent) {
+                                .ident = "count",
+                                .res = (DefId) 0
+                            },
+                            .rhs = BinaryOp(int, (BinOpExpr) {
+                                .op = Add,
+                                .lhs = Var(int, (ResIdent) {
+                                    .ident = "count",
+                                    .res = (DefId) 0
+                                }),
+                                .rhs = Literal(int, Int(1))
+                            })
+                        }),
+                        .rhs = Literal(int, Int(0))
+                    }),
+                    .update = (Assign) {
+                        .lhs = (ResIdent) {
+                            .ident = "count",
+                            .res = (DefId) 0
+                        },
+                        .rhs = BinaryOp(int, (BinOpExpr) {
+                            .op = Add,
+                            .lhs = Var(int, (ResIdent) {
+                                .ident = "count",
+                                .res = (DefId) 0
+                            }),
+                            .rhs = Literal(int, Int(1))
+                        })
+                    },
+                    .body = Return(Literal(int, Int(3)))
+                }),
+                [1] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(string, String("after for should be unreachable"))
+                    ]
+                })
+            ]
+        }),
+        [4] = Func((FuncDef) {
+            .return_type = int,
+            .ident = "check_block",
+            .params = [],
+            .statements = [
+                [0] = Block((Block) {
+                    .statements = [
+                        [0] = Return(Literal(int, Int(4))),
+                        [1] = Print((PrintStmt) {
+                            .expressions = [
+                                [0] = Literal(string, String("after return in block should be unreachable"))
+                            ]
+                        })
+                    ]
+                }),
+                [1] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(string, String("after block should be unreachable"))
+                    ]
+                })
+            ]
+        }),
+        [5] = Func((FuncDef) {
+            .return_type = int,
+            .ident = "check_block_deep",
+            .params = [],
+            .statements = [
+                [0] = Assign((Assign) {
+                    .lhs = (ResIdent) {
+                        .ident = "count",
+                        .res = (DefId) 0
+                    },
+                    .rhs = Literal(int, Int(0))
+                }),
+                [1] = Block((Block) {
+                    .statements = [
+                        [0] = Assign((Assign) {
+                            .lhs = (ResIdent) {
+                                .ident = "count",
+                                .res = (DefId) 0
+                            },
+                            .rhs = BinaryOp(int, (BinOpExpr) {
+                                .op = Add,
+                                .lhs = Var(int, (ResIdent) {
+                                    .ident = "count",
+                                    .res = (DefId) 0
+                                }),
+                                .rhs = Literal(int, Int(1))
+                            })
+                        }),
+                        [1] = While((WhileStmt) {
+                            .cond = Literal(bool, Bool(true)),
+                            .body = Block((Block) {
+                                .statements = [
+                                    [0] = Assign((Assign) {
+                                        .lhs = (ResIdent) {
+                                            .ident = "count",
+                                            .res = (DefId) 0
+                                        },
+                                        .rhs = BinaryOp(int, (BinOpExpr) {
+                                            .op = Add,
+                                            .lhs = Var(int, (ResIdent) {
+                                                .ident = "count",
+                                                .res = (DefId) 0
+                                            }),
+                                            .rhs = Literal(int, Int(1))
+                                        })
+                                    }),
+                                    [1] = Block((Block) {
+                                        .statements = [
+                                            [0] = Return(Literal(int, Int(5))),
+                                            [1] = Print((PrintStmt) {
+                                                .expressions = [
+                                                    [0] = Literal(string, String("unreachable deep 1"))
+                                                ]
+                                            })
+                                        ]
+                                    }),
+                                    [2] = Print((PrintStmt) {
+                                        .expressions = [
+                                            [0] = Literal(string, String("unreachable deep 2"))
+                                        ]
+                                    })
+                                ]
+                            })
+                        }),
+                        [2] = Print((PrintStmt) {
+                            .expressions = [
+                                [0] = Literal(string, String("unreachable deep 3"))
+                            ]
+                        })
+                    ]
+                }),
+                [2] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(string, String("unreachable deep 4"))
+                    ]
+                })
+            ]
+        }),
+        [6] = Func((FuncDef) {
+            .return_type = void,
+            .ident = "main",
+            .params = [],
+            .statements = [
+                [0] = VarDef((VarDef) {
+                    .data_type = int,
+                    .res_ident = (ResIdent) {
+                        .ident = "res",
+                        .res = (DefId) 7
+                    },
+                    .init = Call(int, (FuncCall) {
+                        .res_ident = (ResIdent) {
+                            .ident = "check_while",
+                            .res = (DefId) 1
+                        },
+                        .args = []
+                    })
+                }),
+                [1] = If((IfStmt) {
+                    .cond = BinaryOp(bool, (BinOpExpr) {
+                        .op = Neq,
+                        .lhs = Var(int, (ResIdent) {
+                            .ident = "res",
+                            .res = (DefId) 7
+                        }),
+                        .rhs = Literal(int, Int(1))
+                    }),
+                    .if_true = Block((Block) {
+                        .statements = [
+                            [0] = Print((PrintStmt) {
+                                .expressions = [
+                                    [0] = Literal(string, String("wrong return value from while"))
+                                ]
+                            })
+                        ]
+                    }),
+                    .if_false = Empty()
+                }),
+                [2] = If((IfStmt) {
+                    .cond = BinaryOp(bool, (BinOpExpr) {
+                        .op = Neq,
+                        .lhs = Var(int, (ResIdent) {
+                            .ident = "count",
+                            .res = (DefId) 0
+                        }),
+                        .rhs = Literal(int, Int(1))
+                    }),
+                    .if_true = Block((Block) {
+                        .statements = [
+                            [0] = Print((PrintStmt) {
+                                .expressions = [
+                                    [0] = Literal(string, String("while condition evaluated too often"))
+                                ]
+                            })
+                        ]
+                    }),
+                    .if_false = Empty()
+                }),
+                [3] = Assign((Assign) {
+                    .lhs = (ResIdent) {
+                        .ident = "res",
+                        .res = (DefId) 7
+                    },
+                    .rhs = Call(int, (FuncCall) {
+                        .res_ident = (ResIdent) {
+                            .ident = "check_do_while",
+                            .res = (DefId) 2
+                        },
+                        .args = []
+                    })
+                }),
+                [4] = If((IfStmt) {
+                    .cond = BinaryOp(bool, (BinOpExpr) {
+                        .op = Neq,
+                        .lhs = Var(int, (ResIdent) {
+                            .ident = "res",
+                            .res = (DefId) 7
+                        }),
+                        .rhs = Literal(int, Int(2))
+                    }),
+                    .if_true = Block((Block) {
+                        .statements = [
+                            [0] = Print((PrintStmt) {
+                                .expressions = [
+                                    [0] = Literal(string, String("wrong return value from do-while"))
+                                ]
+                            })
+                        ]
+                    }),
+                    .if_false = Empty()
+                }),
+                [5] = If((IfStmt) {
+                    .cond = BinaryOp(bool, (BinOpExpr) {
+                        .op = Neq,
+                        .lhs = Var(int, (ResIdent) {
+                            .ident = "count",
+                            .res = (DefId) 0
+                        }),
+                        .rhs = Literal(int, Int(1))
+                    }),
+                    .if_true = Block((Block) {
+                        .statements = [
+                            [0] = Print((PrintStmt) {
+                                .expressions = [
+                                    [0] = Literal(string, String("do-while condition evaluated incorrectly"))
+                                ]
+                            })
+                        ]
+                    }),
+                    .if_false = Empty()
+                }),
+                [6] = Assign((Assign) {
+                    .lhs = (ResIdent) {
+                        .ident = "res",
+                        .res = (DefId) 7
+                    },
+                    .rhs = Call(int, (FuncCall) {
+                        .res_ident = (ResIdent) {
+                            .ident = "check_for",
+                            .res = (DefId) 3
+                        },
+                        .args = []
+                    })
+                }),
+                [7] = If((IfStmt) {
+                    .cond = BinaryOp(bool, (BinOpExpr) {
+                        .op = Neq,
+                        .lhs = Var(int, (ResIdent) {
+                            .ident = "res",
+                            .res = (DefId) 7
+                        }),
+                        .rhs = Literal(int, Int(3))
+                    }),
+                    .if_true = Block((Block) {
+                        .statements = [
+                            [0] = Print((PrintStmt) {
+                                .expressions = [
+                                    [0] = Literal(string, String("wrong return value from for"))
+                                ]
+                            })
+                        ]
+                    }),
+                    .if_false = Empty()
+                }),
+                [8] = If((IfStmt) {
+                    .cond = BinaryOp(bool, (BinOpExpr) {
+                        .op = Neq,
+                        .lhs = Var(int, (ResIdent) {
+                            .ident = "count",
+                            .res = (DefId) 0
+                        }),
+                        .rhs = Literal(int, Int(1))
+                    }),
+                    .if_true = Block((Block) {
+                        .statements = [
+                            [0] = Print((PrintStmt) {
+                                .expressions = [
+                                    [0] = Literal(string, String("for condition or update evaluated too often"))
+                                ]
+                            })
+                        ]
+                    }),
+                    .if_false = Empty()
+                }),
+                [9] = Assign((Assign) {
+                    .lhs = (ResIdent) {
+                        .ident = "res",
+                        .res = (DefId) 7
+                    },
+                    .rhs = Call(int, (FuncCall) {
+                        .res_ident = (ResIdent) {
+                            .ident = "check_block",
+                            .res = (DefId) 4
+                        },
+                        .args = []
+                    })
+                }),
+                [10] = If((IfStmt) {
+                    .cond = BinaryOp(bool, (BinOpExpr) {
+                        .op = Neq,
+                        .lhs = Var(int, (ResIdent) {
+                            .ident = "res",
+                            .res = (DefId) 7
+                        }),
+                        .rhs = Literal(int, Int(4))
+                    }),
+                    .if_true = Block((Block) {
+                        .statements = [
+                            [0] = Print((PrintStmt) {
+                                .expressions = [
+                                    [0] = Literal(string, String("wrong return value from block (shallow)"))
+                                ]
+                            })
+                        ]
+                    }),
+                    .if_false = Empty()
+                }),
+                [11] = Assign((Assign) {
+                    .lhs = (ResIdent) {
+                        .ident = "res",
+                        .res = (DefId) 7
+                    },
+                    .rhs = Call(int, (FuncCall) {
+                        .res_ident = (ResIdent) {
+                            .ident = "check_block_deep",
+                            .res = (DefId) 5
+                        },
+                        .args = []
+                    })
+                }),
+                [12] = If((IfStmt) {
+                    .cond = BinaryOp(bool, (BinOpExpr) {
+                        .op = Neq,
+                        .lhs = Var(int, (ResIdent) {
+                            .ident = "res",
+                            .res = (DefId) 7
+                        }),
+                        .rhs = Literal(int, Int(5))
+                    }),
+                    .if_true = Block((Block) {
+                        .statements = [
+                            [0] = Print((PrintStmt) {
+                                .expressions = [
+                                    [0] = Literal(string, String("wrong return value from block (deep)"))
+                                ]
+                            })
+                        ]
+                    }),
+                    .if_false = Empty()
+                }),
+                [13] = If((IfStmt) {
+                    .cond = BinaryOp(bool, (BinOpExpr) {
+                        .op = Neq,
+                        .lhs = Var(int, (ResIdent) {
+                            .ident = "count",
+                            .res = (DefId) 0
+                        }),
+                        .rhs = Literal(int, Int(2))
+                    }),
+                    .if_true = Block((Block) {
+                        .statements = [
+                            [0] = Print((PrintStmt) {
+                                .expressions = [
+                                    [0] = Literal(string, String("deep block evaluated incorrectly"))
+                                ]
+                            })
+                        ]
+                    }),
+                    .if_false = Empty()
+                }),
+                [14] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(string, String("done"))
+                    ]
+                })
+            ]
+        })
+    ]
+}
+(SymDefTable) {
+    .main_func = (DefId) 6,
+    .global_count = 1,
+    .definitions = [
+        [0] = GlobalVar("count", (VarInfo) {
+            .data_type = int,
+            .offset = 0
+        }),
+        [1] = Func("check_while", (FuncInfo) {
+            .item_id = (ItemId) 1,
+            .return_type = int,
+            .param_count = 0,
+            .local_vars = []
+        }),
+        [2] = Func("check_do_while", (FuncInfo) {
+            .item_id = (ItemId) 2,
+            .return_type = int,
+            .param_count = 0,
+            .local_vars = []
+        }),
+        [3] = Func("check_for", (FuncInfo) {
+            .item_id = (ItemId) 3,
+            .return_type = int,
+            .param_count = 0,
+            .local_vars = []
+        }),
+        [4] = Func("check_block", (FuncInfo) {
+            .item_id = (ItemId) 4,
+            .return_type = int,
+            .param_count = 0,
+            .local_vars = []
+        }),
+        [5] = Func("check_block_deep", (FuncInfo) {
+            .item_id = (ItemId) 5,
+            .return_type = int,
+            .param_count = 0,
+            .local_vars = []
+        }),
+        [6] = Func("main", (FuncInfo) {
+            .item_id = (ItemId) 6,
+            .return_type = void,
+            .param_count = 0,
+            .local_vars = [
+                [0] = LocalVar("res", (VarInfo) {
+                    .data_type = int,
+                    .offset = 0
+                })
+            ]
+        }),
+        [7] = LocalVar("res", (VarInfo) {
+            .data_type = int,
+            .offset = 0
+        })
+    ]
+}

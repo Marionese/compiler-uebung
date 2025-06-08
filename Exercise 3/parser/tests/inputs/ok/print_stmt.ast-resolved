@@ -1,0 +1,68 @@
+(Program) {
+    .items = [
+        [0] = Func((FuncDef) {
+            .return_type = void,
+            .ident = "main",
+            .params = [],
+            .statements = [
+                [0] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(string, String("String"))
+                    ]
+                }),
+                [1] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(int, Int(1234567))
+                    ]
+                }),
+                [2] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = UnaryMinus(int, Literal(int, Int(1)))
+                    ]
+                }),
+                [3] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(float, Float(1.5))
+                    ]
+                }),
+                [4] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = UnaryMinus(float, Literal(float, Float(0)))
+                    ]
+                }),
+                [5] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(float, Float(1.23e+47))
+                    ]
+                }),
+                [6] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(float, Float(1.23e-43))
+                    ]
+                }),
+                [7] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(bool, Bool(true))
+                    ]
+                }),
+                [8] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(bool, Bool(false))
+                    ]
+                })
+            ]
+        })
+    ]
+}
+(SymDefTable) {
+    .main_func = (DefId) 0,
+    .global_count = 0,
+    .definitions = [
+        [0] = Func("main", (FuncInfo) {
+            .item_id = (ItemId) 0,
+            .return_type = void,
+            .param_count = 0,
+            .local_vars = []
+        })
+    ]
+}

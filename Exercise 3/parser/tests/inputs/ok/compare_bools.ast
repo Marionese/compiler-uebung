@@ -1,0 +1,170 @@
+(Program) {
+    .items = [
+        [0] = Func((FuncDef) {
+            .return_type = void,
+            .ident = "main",
+            .params = [],
+            .statements = [
+                [0] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = BinaryOp((BinOpExpr) {
+                            .op = Lt,
+                            .lhs = Literal(Bool(false)),
+                            .rhs = Literal(Bool(false))
+                        })
+                    ]
+                }),
+                [1] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = BinaryOp((BinOpExpr) {
+                            .op = Lt,
+                            .lhs = Literal(Bool(false)),
+                            .rhs = Literal(Bool(true))
+                        })
+                    ]
+                }),
+                [2] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = BinaryOp((BinOpExpr) {
+                            .op = Lt,
+                            .lhs = Literal(Bool(true)),
+                            .rhs = Literal(Bool(false))
+                        })
+                    ]
+                }),
+                [3] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = BinaryOp((BinOpExpr) {
+                            .op = Lt,
+                            .lhs = Literal(Bool(true)),
+                            .rhs = Literal(Bool(true))
+                        })
+                    ]
+                }),
+                [4] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(String("---"))
+                    ]
+                }),
+                [5] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = BinaryOp((BinOpExpr) {
+                            .op = Gt,
+                            .lhs = Literal(Bool(false)),
+                            .rhs = Literal(Bool(false))
+                        })
+                    ]
+                }),
+                [6] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = BinaryOp((BinOpExpr) {
+                            .op = Gt,
+                            .lhs = Literal(Bool(false)),
+                            .rhs = Literal(Bool(true))
+                        })
+                    ]
+                }),
+                [7] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = BinaryOp((BinOpExpr) {
+                            .op = Gt,
+                            .lhs = Literal(Bool(true)),
+                            .rhs = Literal(Bool(false))
+                        })
+                    ]
+                }),
+                [8] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = BinaryOp((BinOpExpr) {
+                            .op = Gt,
+                            .lhs = Literal(Bool(true)),
+                            .rhs = Literal(Bool(true))
+                        })
+                    ]
+                }),
+                [9] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(String("---"))
+                    ]
+                }),
+                [10] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = BinaryOp((BinOpExpr) {
+                            .op = Leq,
+                            .lhs = Literal(Bool(false)),
+                            .rhs = Literal(Bool(false))
+                        })
+                    ]
+                }),
+                [11] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = BinaryOp((BinOpExpr) {
+                            .op = Leq,
+                            .lhs = Literal(Bool(false)),
+                            .rhs = Literal(Bool(true))
+                        })
+                    ]
+                }),
+                [12] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = BinaryOp((BinOpExpr) {
+                            .op = Leq,
+                            .lhs = Literal(Bool(true)),
+                            .rhs = Literal(Bool(false))
+                        })
+                    ]
+                }),
+                [13] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = BinaryOp((BinOpExpr) {
+                            .op = Leq,
+                            .lhs = Literal(Bool(true)),
+                            .rhs = Literal(Bool(true))
+                        })
+                    ]
+                }),
+                [14] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(String("---"))
+                    ]
+                }),
+                [15] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = BinaryOp((BinOpExpr) {
+                            .op = Geq,
+                            .lhs = Literal(Bool(false)),
+                            .rhs = Literal(Bool(false))
+                        })
+                    ]
+                }),
+                [16] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = BinaryOp((BinOpExpr) {
+                            .op = Geq,
+                            .lhs = Literal(Bool(false)),
+                            .rhs = Literal(Bool(true))
+                        })
+                    ]
+                }),
+                [17] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = BinaryOp((BinOpExpr) {
+                            .op = Geq,
+                            .lhs = Literal(Bool(true)),
+                            .rhs = Literal(Bool(false))
+                        })
+                    ]
+                }),
+                [18] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = BinaryOp((BinOpExpr) {
+                            .op = Geq,
+                            .lhs = Literal(Bool(true)),
+                            .rhs = Literal(Bool(true))
+                        })
+                    ]
+                })
+            ]
+        })
+    ]
+}
