@@ -1,0 +1,46 @@
+(Program) {
+    .items = [
+        [0] = Func((FuncDef) {
+            .return_type = void,
+            .ident = "main",
+            .params = [],
+            .statements = [
+                [0] = Print((PrintStmt) {
+                    .expressions = []
+                }),
+                [1] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(String("Hello ")),
+                        [1] = Literal(String("World!"))
+                    ]
+                }),
+                [2] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(Int(1)),
+                        [1] = Literal(String(" + ")),
+                        [2] = Literal(Int(2)),
+                        [3] = Literal(String(" = ")),
+                        [4] = BinaryOp((BinOpExpr) {
+                            .op = Add,
+                            .lhs = Literal(Int(1)),
+                            .rhs = Literal(Int(2))
+                        })
+                    ]
+                }),
+                [3] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(Int(1)),
+                        [1] = Literal(Int(2)),
+                        [2] = Literal(Int(3)),
+                        [3] = Literal(Int(4)),
+                        [4] = Literal(Int(5)),
+                        [5] = Literal(Int(6)),
+                        [6] = Literal(Int(7)),
+                        [7] = Literal(Int(8)),
+                        [8] = Literal(Int(9))
+                    ]
+                })
+            ]
+        })
+    ]
+}

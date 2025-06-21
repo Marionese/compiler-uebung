@@ -1,0 +1,58 @@
+(Program) {
+    .items = [
+        [0] = Func((FuncDef) {
+            .return_type = void,
+            .ident = "main",
+            .params = [],
+            .statements = [
+                [0] = Print((PrintStmt) {
+                    .expressions = []
+                }),
+                [1] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(string, String("Hello ")),
+                        [1] = Literal(string, String("World!"))
+                    ]
+                }),
+                [2] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(int, Int(1)),
+                        [1] = Literal(string, String(" + ")),
+                        [2] = Literal(int, Int(2)),
+                        [3] = Literal(string, String(" = ")),
+                        [4] = BinaryOp(int, (BinOpExpr) {
+                            .op = Add,
+                            .lhs = Literal(int, Int(1)),
+                            .rhs = Literal(int, Int(2))
+                        })
+                    ]
+                }),
+                [3] = Print((PrintStmt) {
+                    .expressions = [
+                        [0] = Literal(int, Int(1)),
+                        [1] = Literal(int, Int(2)),
+                        [2] = Literal(int, Int(3)),
+                        [3] = Literal(int, Int(4)),
+                        [4] = Literal(int, Int(5)),
+                        [5] = Literal(int, Int(6)),
+                        [6] = Literal(int, Int(7)),
+                        [7] = Literal(int, Int(8)),
+                        [8] = Literal(int, Int(9))
+                    ]
+                })
+            ]
+        })
+    ]
+}
+(SymDefTable) {
+    .main_func = (DefId) 0,
+    .global_count = 0,
+    .definitions = [
+        [0] = Func("main", (FuncInfo) {
+            .item_id = (ItemId) 0,
+            .return_type = void,
+            .param_count = 0,
+            .local_vars = []
+        })
+    ]
+}

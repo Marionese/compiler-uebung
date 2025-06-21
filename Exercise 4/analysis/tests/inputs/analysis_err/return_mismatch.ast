@@ -1,0 +1,18 @@
+(Program) {
+    .items = [
+        [0] = Func((FuncDef) {
+            .return_type = int,
+            .ident = "answer",
+            .params = [],
+            .statements = [
+                [0] = Return(Literal(Float(42)))
+            ]
+        }),
+        [1] = Func((FuncDef) {
+            .return_type = void,
+            .ident = "main",
+            .params = [],
+            .statements = []
+        })
+    ]
+}
